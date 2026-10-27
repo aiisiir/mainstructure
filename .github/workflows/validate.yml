@@ -1,0 +1,34 @@
+name: Framework checks
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check required files and directories
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f FRAMEWORK.md
+          test -f core/principles.md
+          test -f core/seo-and-discoverability.md
+          test -f quality-gates/seo-gate.md
+          test -d workflows
+          test -d templates
+          test -d skills
+      - name: Validate project-profile schema JSON syntax
+        run: node -e "JSON.parse(require('fs').readFileSync('stack-selection/project-profile.schema.json', 'utf8')); console.log('JSON syntax OK')"
+      - name: Ensure no Python scripts are introduced
+        shell: bash
+        run: |
+          if find . -type f -name '*.py' -print -quit | grep -q .; then
+            echo 'Python scripts are not part of this framework.' >&2
+            exit 1
+          fi

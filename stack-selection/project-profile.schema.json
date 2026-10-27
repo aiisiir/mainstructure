@@ -1,0 +1,246 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Engineering Framework Project Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "project",
+    "project_type",
+    "status",
+    "goals",
+    "constraints",
+    "users",
+    "data_classification",
+    "deployment",
+    "seo",
+    "stack_decision",
+    "quality_gates"
+  ],
+  "properties": {
+    "project": {
+      "type": "object",
+      "required": [
+        "name",
+        "owner"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "owner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "repository": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "project_type": {
+      "type": "string",
+      "enum": [
+        "web-application",
+        "mobile-application",
+        "api-service",
+        "data-platform",
+        "desktop-application",
+        "embedded",
+        "other"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "discovery",
+        "feasibility",
+        "design",
+        "implementation",
+        "release",
+        "maintenance"
+      ]
+    },
+    "goals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "users": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "data_classification": {
+      "type": "string",
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "sensitive",
+        "mixed"
+      ]
+    },
+    "deployment": {
+      "type": "object",
+      "required": [
+        "hosting_constraints",
+        "operational_owner"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "hosting_constraints": {
+          "type": "string"
+        },
+        "operational_owner": {
+          "type": "string"
+        },
+        "availability_target": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "rpo": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "rto": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "seo": {
+      "type": "object",
+      "required": [
+        "applicability",
+        "importance",
+        "route_strategy_status"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "applicability": {
+          "type": "string",
+          "enum": [
+            "critical",
+            "important",
+            "limited",
+            "not-applicable",
+            "undetermined"
+          ]
+        },
+        "importance": {
+          "type": "string"
+        },
+        "languages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "indexable_route_families": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "route_strategy_status": {
+          "type": "string",
+          "enum": [
+            "undecided",
+            "proposed",
+            "approved"
+          ]
+        },
+        "approved_rendering_strategy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "owner": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "stack_decision": {
+      "type": "object",
+      "required": [
+        "status",
+        "adr_path"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "undecided",
+            "in-review",
+            "approved"
+          ]
+        },
+        "adr_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "candidates": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "selected_stack_summary": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "quality_gates": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "open_decisions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "last_reviewed": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    }
+  }
+}
